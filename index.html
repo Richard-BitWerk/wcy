@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>味纯园 - 正宗兰州手工拉面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FFD700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: #FFD700;
+        }
+        
+        .book-btn {
+            background: #FFD700;
+            color: #8B4513;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .book-btn:hover {
+            background: #FFA500;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23D2B48C" width="1200" height="600"/><text x="600" y="300" font-family="Arial" font-size="48" fill="%23654321" text-anchor="middle" dominant-baseline="middle">传统手工拉面</text></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-primary {
+            background: #FFD700;
+            color: #8B4513;
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Story Section */
+        .story {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .story-text h2 {
+            font-size: 2.5rem;
+            color: #8B4513;
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .story-image {
+            background: linear-gradient(45deg, #D2B48C, #F5DEB3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .story-image h3 {
+            font-size: 1.5rem;
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+        
+        /* Menu Section */
+        .menu {
+            padding: 5rem 0;
+            background: #f8f8f8;
+        }
+        
+        .menu h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8B4513;
+            margin-bottom: 3rem;
+        }
+        
+        .menu-content {
+            text-align: center;
+        }
+        
+        .menu-btn {
+            background: #8B4513;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .menu-btn:hover {
+            background: #A0522D;
+            transform: translateY(-2px);
+        }
+        
+        /* Food Gallery */
+        .gallery {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8B4513;
+            margin-bottom: 3rem;
+        }
+        
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .food-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .food-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .food-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .food-item-content {
+            padding: 1.5rem;
+        }
+        
+        .food-item h3 {
+            font-size: 1.3rem;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+        
+        .food-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Booking Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .close:hover {
+            color: #8B4513;
+        }
+        
+        .booking-form h2 {
+            color: #8B4513;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #8B4513;
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            background: #8B4513;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #A0522D;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section h3 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section p {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Fixed booking button for mobile */
+        .fixed-book-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #FFD700;
+            color: #8B4513;
+            padding: 1rem;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .fixed-book-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-container">
+                <div class="logo">味纯园</div>
+                <ul class="nav-menu">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#story">品牌故事</a></li>
+                    <li><a href="#menu">菜单</a></li>
+                    <li><a href="#gallery">美食展示</a></li>
+                </ul>
+                <button class="book-btn" onclick="openBookingModal()">立即预订</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>味纯园</h1>
+            <p>传承千年手工拉面技艺，品味地道兰州风情</p>
+            <div class="cta-buttons">
+                <button class="cta-btn cta-primary" onclick="openBookingModal()">立即预订</button>
+                <a href="#story" class="cta-btn cta-secondary">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="story">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>一碗面的文化哲学</h2>
+                    <p>兰州牛肉面是丝路文明的结晶：西亚小麦、西域香料、中原烹饪技艺在黄河畔融合，体现了"和而不同"的东方智慧。</p>
+                    <p>其发展史更是一部民生史诗——40万从业者依托"一碗面"脱贫致富，从沿街叫卖到百亿产业，印证了"小吃撬动大民生"的中国故事。</p>
+                    <p>在味纯园，我们不仅传承这一古老技艺，更承载着深厚的文化底蕴。每一根面条都是匠人精神的体现，每一口汤汁都蕴含着历史的厚重。</p>
+                </div>
+                <div class="story-image">
+                    <h3>传统手工拉面</h3>
+                    <p>师傅现场手工拉制</p>
+                    <p>一清二白三红四绿五黄</p>
+                    <p>传承千年古法工艺</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2>精选菜单</h2>
+            <div class="menu-content">
+                <p>探索我们精心制作的传统拉面和经典小菜</p>
+                <button class="menu-btn" onclick="openMenu()">查看完整菜单</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Gallery -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>美食展示</h2>
+            <div class="food-grid">
+                <div class="food-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 250'><rect fill='%23F5F5DC' width='300' height='250'/><text x='150' y='125' font-family='Arial' font-size='16' fill='%23654321' text-anchor='middle' dominant-baseline='middle'>水煮毛豆</text></svg>" alt="水煮毛豆">
+                    <div class="food-item-content">
+                        <h3>水煮毛豆</h3>
+                        <p>新鲜毛豆，简单调味，清香爽口</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 250'><rect fill='%23F5F5DC' width='300' height='250'/><text x='150' y='125' font-family='Arial' font-size='16' fill='%23654321' text-anchor='middle' dominant-baseline='middle'>兰州拉面</text></svg>" alt="兰州拉面">
+                    <div class="food-item-content">
+                        <h3>兰州拉面</h3>
+                        <p>传统手工拉面，清汤牛肉，经典口味</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 250'><rect fill='%23F5F5DC' width='300' height='250'/><text x='150' y='125' font-family='Arial' font-size='16' fill='%23654321' text-anchor='middle' dominant-baseline='middle'>川味凉粉</text></svg>" alt="川味凉粉">
+                    <div class="food-item-content">
+                        <h3>川味凉粉</h3>
+                        <p>爽滑凉粉配特制辣椒油，开胃下饭</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 250'><rect fill='%23F5F5DC' width='300' height='250'/><text x='150' y='125' font-family='Arial' font-size='16' fill='%23654321' text-anchor='middle' dominant-baseline='middle'>拍黄瓜</text></svg>" alt="拍黄瓜">
+                    <div class="food-item-content">
+                        <h3>拍黄瓜</h3>
+                        <p>清脆爽口，蒜香浓郁，完美开胃菜</p>
+                    </div>
+                </div>
+                <div class="food-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 250'><rect fill='%23F5F5DC' width='300' height='250'/><text x='150' y='125' font-family='Arial' font-size='16' fill='%23654321' text-anchor='middle' dominant-baseline='middle'>红烧牛肉面</text></svg>" alt="红烧牛肉面">
+                    <div class="food-item-content">
+                        <h3>红烧牛肉面</h3>
+                        <p>浓郁汤底，软烂牛肉，香气四溢</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBookingModal()">&times;</span>
+            <form class="booking-form" onsubmit="submitBooking(event)">
+                <h2>预订餐桌</h2>
+                <div class="form-group">
+                    <label for="name">姓名 *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">日期 *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">时间 *</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="people">人数 *</label>
+                        <input type="number" id="people" name="people" min="1" max="20" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">联系电话 *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">特殊要求</label>
+                    <textarea id="message" name="message" rows="3" placeholder="如有特殊要求或备注，请在此填写"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">确认预订</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fixed Booking Button for Mobile -->
+    <button class="fixed-book-btn" onclick="openBookingModal()">📞</button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>味纯园</h3>
+                    <p>传承千年手工拉面技艺</p>
+                    <p>品味地道兰州风情</p>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <p>预订热线：请通过网站预订</p>
+                    <p>邮箱：jc2062494@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>营业时间</h3>
+                    <p>周一至周日</p>
+                    <p>11:00 - 22:00</p>
+                </div>
+            </div>
+            <p>&copy; 2024 味纯园. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Booking Modal Functions
+        function openBookingModal() {
+            document.getElementById('bookingModal').style.display = 'block';
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookingModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Submit booking form
+        function submitBooking(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const bookingData = {
+                name: formData.get('name'),
+                date: formData.get('date'),
+                time: formData.get('time'),
+                people: formData.get('people'),
+                phone: formData.get('phone'),
+                message: formData.get('message')
+            };
+            
+            // Create email body
+            const emailBody = `
+新的预订请求：
+
+姓名：${bookingData.name}
+日期：${bookingData.date}
+时间：${bookingData.time}
+人数：${bookingData.people}
+联系电话：${bookingData.phone}
+特殊要求：${bookingData.message || '无'}
+
+请及时联系客户确认预订。
+            `;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:jc2062494@gmail.com?subject=【味纯园】新的预订请求 - ${bookingData.name}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            alert('预订信息已准备发送至邮箱，请确认发送。我们会尽快与您联系确认预订！');
+            
+            // Close modal
+            closeBookingModal();
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Open menu PDF
+        function openMenu() {
+            // Since we can't directly access the PDF file, we'll show a message
+            alert('菜单PDF文件需要上传到服务器后才能显示。请联系网站管理员上传菜单文件。');
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', today);
+        });
+    </script>
+</body>
+</html>
